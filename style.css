@@ -1,0 +1,18 @@
+.container {
+    margin:auto;
+    margin-top: 100px;
+    width:400px;
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap:10px;
+}
+
+.cell {
+    border-radius: 10px;
+    background-color: grey;
+    height:60px;
+    text-align: center;
+    color:white;
+    font-size:2rem;
+    padding:1rem;
+}
