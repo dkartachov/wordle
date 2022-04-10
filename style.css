@@ -10,9 +10,18 @@
 .cell {
     border-radius: 10px;
     background-color: grey;
-    height:60px;
+    height:50px;
+    position:relative;
     text-align: center;
     color:white;
     font-size:2rem;
-    padding:1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1;
+    padding: 1rem;
+}
+
+.letter {
+    
 }
