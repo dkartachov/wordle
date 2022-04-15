@@ -31,7 +31,7 @@ document.addEventListener('keydown', (event) => {
 
         guesses++;
 
-        if (guesses === 5) {
+        if (guesses === 6) {
             gameOver = true;
             console.log(`Answer was: ${answer}`);
         }
@@ -104,7 +104,7 @@ function getNextCol(id) {
 function getNextRow(id) {
     let row = parseInt(id.charAt(0));
 
-    if(row < 5) {
+    if(row < 6) {
         return (row + 1) + '0';
     }
     
@@ -124,7 +124,7 @@ function won(row) {
 
     if (row === 5) return;
 
-    for (let r = row; r < 5; r++) {
+    for (let r = row; r < 6; r++) {
         lockRow(`${r}0`);
     }
 }
