@@ -1,11 +1,20 @@
 let answer = '';
 let words = [];
+let keys;
 let randomWordApi = 'https://random-word-api.herokuapp.com/word?number=1&length=5';
 let nextId = '00';
 let guess = '';
 let guesses = 0;
 let ready = false;
 let gameOver = false;
+
+async function init() {
+    keys = document.getElementsByClassName('key');
+
+    await fetchWords();
+
+    ready = true;
+}
 
 async function fetchWords() {
     while (!answer) {
@@ -15,8 +24,6 @@ async function fetchWords() {
     
         answer = data[0];
     }
-
-    ready = true;
 }
 
 document.addEventListener('keydown', (event) => {
@@ -132,6 +139,8 @@ function won(row) {
 function validateGuess(id, guess) {
     let ans = answer;
     let guessed = 0;
+    // const keys = document.getElementsByClassName('key');
+    console.log(keys.length);
     const row = parseInt(id.charAt(0));
 
     // loop once for any green letters
@@ -141,6 +150,14 @@ function validateGuess(id, guess) {
 
         if (letter === answer.charAt(col)) {
             cell.style.backgroundColor = 'green';
+
+            for (let key of keys) {
+                if (key.textContent.toLowerCase() === letter) {
+                    key.style.backgroundColor = 'black';
+                    
+                    break;
+                }
+            }
 
             guess = setCharAt(guess, col, '-');
             ans = setCharAt(ans, col, '-');
@@ -166,6 +183,14 @@ function validateGuess(id, guess) {
 
         if (ans.includes(letter)) {
             cell.style.backgroundColor = 'orange';
+
+            for (let key of keys) {
+                if (key.textContent.toLowerCase() === letter) {
+                    key.style.backgroundColor = 'black';
+                    
+                    break;
+                }
+            }
 
             guess = setCharAt(guess, col, '-');
             ans = setCharAt(ans, ans.indexOf(letter), '-');
