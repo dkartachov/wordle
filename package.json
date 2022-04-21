@@ -2,8 +2,10 @@
   "name": "wordle",
   "version": "1.0.0",
   "description": "Wordle clone",
-  "main": "wordle.js",
+  "type": "module",
+  "main": "src/server.js",
   "scripts": {
+    "start": "node .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
