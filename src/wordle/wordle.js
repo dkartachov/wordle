@@ -7,6 +7,7 @@ let guess = '';
 let guesses = 0;
 let ready = false;
 let gameOver = false;
+const blacked = 'rgb(48, 48, 48)';
 
 async function init() {
     keys = document.getElementsByClassName('key');
@@ -52,10 +53,11 @@ document.addEventListener('keydown', (event) => {
     if (key === 'Backspace') {
         if (cell.textContent) {
             cell.textContent = '';
+            cell.style.backgroundColor = 'black';
         } else {
             nextId = getPrevCol(nextId);
             document.getElementById(nextId).textContent = '';
-            
+            document.getElementById(nextId).style.backgroundColor = 'black';
         }
 
         guess = guess.slice(0, -1);
@@ -69,6 +71,7 @@ document.addEventListener('keydown', (event) => {
     if (guess.length < 5) {
         guess += key;
         cell.textContent = key.toUpperCase();
+        cell.style.backgroundColor = 'grey';
         nextId = getNextCol(nextId);
         bulge(cell, 1.1);
     }
@@ -129,7 +132,7 @@ function lockRow(id) {
 function won(row) {
     row++;
 
-    if (row === 5) return;
+    if (row === 6) return;
 
     for (let r = row; r < 6; r++) {
         lockRow(`${r}0`);
@@ -139,8 +142,6 @@ function won(row) {
 function validateGuess(id, guess) {
     let ans = answer;
     let guessed = 0;
-    // const keys = document.getElementsByClassName('key');
-    console.log(keys.length);
     const row = parseInt(id.charAt(0));
 
     // loop once for any green letters
@@ -151,13 +152,7 @@ function validateGuess(id, guess) {
         if (letter === answer.charAt(col)) {
             cell.style.backgroundColor = 'green';
 
-            for (let key of keys) {
-                if (key.textContent.toLowerCase() === letter) {
-                    key.style.backgroundColor = 'black';
-                    
-                    break;
-                }
-            }
+            document.getElementById(letter.toUpperCase()).style.backgroundColor = 'green';
 
             guess = setCharAt(guess, col, '-');
             ans = setCharAt(ans, col, '-');
@@ -184,16 +179,30 @@ function validateGuess(id, guess) {
         if (ans.includes(letter)) {
             cell.style.backgroundColor = 'orange';
 
-            for (let key of keys) {
-                if (key.textContent.toLowerCase() === letter) {
-                    key.style.backgroundColor = 'black';
-                    
-                    break;
-                }
+            let key = document.getElementById(letter.toUpperCase());
+
+            if (key.style.backgroundColor !== 'green') {
+                key.style.backgroundColor = 'orange';
             }
 
             guess = setCharAt(guess, col, '-');
             ans = setCharAt(ans, ans.indexOf(letter), '-');
+        }
+    }
+
+    // third loop to black out all other letters
+    for (let col = 0; col < 5; col++) {
+        let letter = guess.charAt(col);
+
+        if (isLetter(letter)) {
+            document.getElementById(`${row}${col}`).style.backgroundColor = blacked;
+
+            let key = document.getElementById(letter.toUpperCase());
+            let color = key.style.backgroundColor;
+    
+            if (color !== 'green' && color !== 'orange') {
+                key.style.backgroundColor = blacked;
+            }
         }
     }
 

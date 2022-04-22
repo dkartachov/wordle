@@ -1,11 +1,10 @@
 .container {
-    margin:auto;
-    margin-top: 50px;
-    width:300px;
-    /* background-color: red; */
-    display:grid;
+    margin: auto;
+    margin-top: 200px;
+    width: 325px;
+    display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    gap:5px;
+    gap: 5px;
 }
 
 .cell {
@@ -14,15 +13,13 @@
     border-style: solid;
     border-color: grey;
     background-color: black;
-    height:25px;
-    /* position:relative; */
+    height: 25px;
     text-align: center;
-    color:white;
-    font-size:1.5rem;
+    color: white;
+    font-size: 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    /* aspect-ratio: 1; */
     padding: 1rem;
 }
 
@@ -35,11 +32,11 @@
 }
 
 .key {
-    color:white;
+    color: white;
     background-color: grey;
     display: inline-block;
     border: 3px;
     padding: 20px;
-    margin-bottom:5px;
+    margin-bottom: 5px;
 }
 
